@@ -17,6 +17,7 @@ from oauth2client.client import GoogleCredentials
 
 # [START authenticating]
 
+#export GOOGLE_APPLICATION_CREDENTIALS=/home/acgt/ashish_work/anupam_speech/audio2txt-6ed49786eab0.json
 
 # Application default credentials provided by env variable
 # GOOGLE_APPLICATION_CREDENTIALS
@@ -36,7 +37,10 @@ video_file_path = '/home/acgt/ashish_work/anupam_speech/Seafret - Oceans.mp4'
 def extract_audio(video_file_path):
     ffmpeg_cmd = 'ffmpeg -i '+ video_file_path + ' -vn -acodec copy output-audio.aac'
     subprocess.call(ffmpeg_cmd, shell=True)
-    main(output-audio.aac)
+    
+    dirname, filename = os.path.split(os.path.abspath(__file__))
+    audio_path = os.path.join(dirname, 'output-audio.aac')
+    main(audio_path)
 
 def main(speech_file):
     """Transcribe the given audio file asynchronously.
